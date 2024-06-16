@@ -101,12 +101,20 @@ function askPlayAgain()
     }
 }
 
+let is_focus = true;
+window.addEventListener("focus", () => {
+    is_focus = true;
+});
+window.addEventListener("blur", () => {
+    is_focus = false;
+})
+
 setInterval(() => {
-    if (speed < 100) {
+    if (speed < 100 && is_focus) {
         speed ++;
         document.getElementById("level").innerText = "SPEED " + speed.toString();
         document.getElementById("speed").value = speed;
-    } else {
+    } else if (is_focus) {
         setTimeout(() => {
             alert("YOUR SPEED IS MAX!!!\nYOU ARE GREAT!!!");
             askPlayAgain();
